@@ -1,0 +1,54 @@
+.p-dropdown {
+  border-radius: 8px !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.08) !important; /* Mirip FilledInput */
+  font-size: 15px !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+.p-dropdown:hover {
+  background-color: rgba(0, 0, 0, 0.16) !important;
+}
+
+.p-dropdown.p-focus {
+  border-color: rgba(0, 0, 0, 0.87) !important; /* Mirip efek focus MUI */
+  background-color: rgba(0, 0, 0, 0.16) !important;
+  box-shadow: none !important;
+}
+
+.p-dropdown.p-disabled {
+  background-color: rgba(0, 0, 0, 0.12) !important;
+  color: rgba(0, 0, 0, 0.38) !important;
+}
+
+.p-dropdown-panel {
+  border-radius: 8px !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+}
+
+.p-dropdown-item {
+  font-size: 15px !important;
+  padding: 10px 16px !important;
+  transition: background 0.2s ease-in-out !important;
+}
+
+.p-dropdown-item.p-highlight {
+  background-color: rgba(25, 118, 210, 0.1) !important;
+  color: #1976d2 !important;
+}
+
+.p-dropdown-item:hover {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Error State */
+.p-dropdown.p-invalid {
+  border-color: #d32f2f !important; /* Sesuai error MUI */
+  background-color: rgba(211, 47, 47, 0.08) !important;
+}
+
+.p-dropdown.p-invalid.p-focus {
+  background-color: rgba(211, 47, 47, 0.16) !important;
+  border-color: #d32f2f !important;
+}
