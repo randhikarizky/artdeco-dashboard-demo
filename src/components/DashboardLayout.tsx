@@ -20,6 +20,7 @@ import {
   Tooltip,
 } from '@mui/material';
 import Icon from '@/components/Icon';
+import { SettingsButton, SettingsDrawer } from '@/components/ThemeControls';
 
 const DRAWER_WIDTH = 280;
 
@@ -163,6 +164,7 @@ export default function DashboardLayout({ children }: LayoutProps) {
             Dashboard Executive
           </Typography>
           <Stack direction="row" spacing={1}>
+            <SettingsButton />
             <Tooltip title="Demo Mode">
               <IconButton>
                 <Icon icon="mdi:information" width={20} />
@@ -171,6 +173,9 @@ export default function DashboardLayout({ children }: LayoutProps) {
           </Stack>
         </Toolbar>
       </AppBar>
+
+      {/* Settings Drawer */}
+      <SettingsDrawer />
 
       {/* Drawer */}
       <Box

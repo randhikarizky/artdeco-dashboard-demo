@@ -34,11 +34,14 @@ import {
   InputLabel,
   Select,
   MenuItem,
+  CardActions,
 } from "@mui/material";
 
 import { Chart } from "@/components/Chart";
 import { ChartLegends } from "@/components/ChartLegends";
 import Icon from "@/components/Icon";
+import AppWidget from "@/components/AppWidget";
+import ActiveAreasChart from "@/components/ActiveAreasChart";
 import { useChart } from "@/hooks/useChart";
 import DashboardLayout from "@/components/DashboardLayout";
 
@@ -116,6 +119,60 @@ const DUMMY_DATA = {
     { id: 5, name: "Laporan Patroli - Area A Gate 2", lat: -6.2088, lng: 106.8500, type: "patrol", employee: "Eko Prasetyo", date: "2026-03-05 13:45", status: "completed" },
     { id: 6, name: "Laporan Insiden - Area E", lat: -6.2388, lng: 106.8756, type: "incident", employee: "Fitri Handayani", date: "2026-03-05 14:30", status: "in-progress" },
   ],
+  inactiveEmployees: {
+    today: [
+      { id: 1, name: "Rizki Pratama", avatar: "RP", position: "Security Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 7) },
+      { id: 2, name: "Ani Sulistyowati", avatar: "AS", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 2, 7) },
+      { id: 3, name: "Bambang Wijayanto", avatar: "BW", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 2, 7) },
+      { id: 4, name: "Citra Dewi", avatar: "CD", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 7) },
+      { id: 5, name: "Dani Setiawan", avatar: "DS", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 7) },
+      { id: 6, name: "Erna Widiastuti", avatar: "EW", position: "Admin Staff", unit: "Unit Operasional", lastReport: new Date(2026, 2, 7) },
+      { id: 7, name: "Fajar Ramadhan", avatar: "FR", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 7) },
+      { id: 8, name: "Gita Puspita", avatar: "GP", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 2, 7) },
+      { id: 9, name: "Hadi Santoso", avatar: "HS", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 2, 7) },
+      { id: 10, name: "Ika Rahmawati", avatar: "IR", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 7) },
+      { id: 11, name: "Jajang Sutrisno", avatar: "JS", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 7) },
+    ],
+    threeDays: [
+      { id: 12, name: "Kartika Sari", avatar: "KS", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 5) },
+      { id: 13, name: "Lukman Hakim", avatar: "LH", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 5) },
+      { id: 14, name: "Mira Handayani", avatar: "MH", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 2, 5) },
+      { id: 15, name: "Nanda Pratama", avatar: "NP", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 2, 5) },
+      { id: 16, name: "Oki Setiawan", avatar: "OS", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 5) },
+      { id: 17, name: "Putri Ayu", avatar: "PA", position: "Admin Staff", unit: "Unit Operasional", lastReport: new Date(2026, 2, 5) },
+      { id: 18, name: "Qori Hidayat", avatar: "QH", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 5) },
+      { id: 19, name: "Rini Susanti", avatar: "RS", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 2, 5) },
+      { id: 20, name: "Samsul Bahri", avatar: "SB", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 2, 5) },
+      { id: 21, name: "Tari Wulandari", avatar: "TW", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 5) },
+      { id: 22, name: "Udin Setiawan", avatar: "US", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 5) },
+    ],
+    sevenDays: [
+      { id: 23, name: "Vina Melati", avatar: "VM", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 1) },
+      { id: 24, name: "Wahyu Nugroho", avatar: "WN", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 1) },
+      { id: 25, name: "Xenia Pratiwi", avatar: "XP", position: "Admin Staff", unit: "Unit Operasional", lastReport: new Date(2026, 2, 1) },
+      { id: 26, name: "Yanto Susilo", avatar: "YS", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 2, 1) },
+      { id: 27, name: "Zahra Amelia", avatar: "ZA", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 2, 1) },
+      { id: 28, name: "Adi Nugraha", avatar: "AN", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 1) },
+      { id: 29, name: "Bella Safitri", avatar: "BS", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 2, 1) },
+      { id: 30, name: "Cahyo Budi", avatar: "CB", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 2, 1) },
+      { id: 31, name: "Diana Purnama", avatar: "DP", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 2, 1) },
+      { id: 32, name: "Edi Santosa", avatar: "ES", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 2, 1) },
+      { id: 33, name: "Fani Rahayu", avatar: "FR", position: "Admin Staff", unit: "Unit Operasional", lastReport: new Date(2026, 2, 1) },
+    ],
+    moreThanWeek: [
+      { id: 34, name: "Galih Pramudya", avatar: "GP", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 1, 25) },
+      { id: 35, name: "Hesti Wulandari", avatar: "HW", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 1, 22) },
+      { id: 36, name: "Ivan Kurniawan", avatar: "IK", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 1, 20) },
+      { id: 37, name: "Julia Kartika", avatar: "JK", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 1, 18) },
+      { id: 38, name: "Krisna Wijaya", avatar: "KW", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 1, 15) },
+      { id: 39, name: "Lina Mariana", avatar: "LM", position: "Admin Staff", unit: "Unit Operasional", lastReport: new Date(2026, 1, 12) },
+      { id: 40, name: "Mahmud Yusuf", avatar: "MY", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 1, 10) },
+      { id: 41, name: "Nina Anggraini", avatar: "NA", position: "Cleaning Staff", unit: "Unit Kebersihan", lastReport: new Date(2026, 1, 8) },
+      { id: 42, name: "Omar Hasan", avatar: "OH", position: "Technical Staff", unit: "Unit Teknis", lastReport: new Date(2026, 1, 5) },
+      { id: 43, name: "Prita Maharani", avatar: "PM", position: "Security Officer", unit: "Unit Keamanan", lastReport: new Date(2026, 1, 1) },
+      { id: 44, name: "Qiqi Ramadhani", avatar: "QR", position: "Patrol Officer", unit: "Unit Patroli", lastReport: new Date(2026, 0, 28) },
+    ],
+  },
 };
 
 export default function DashboardPage() {
@@ -132,6 +189,7 @@ export default function DashboardPage() {
   const [selectedLocation, setSelectedLocation] = useState<number | null>(null);
   const [filterDialog, setFilterDialog] = useState<string | null>(null);
   const [tempFilterValue, setTempFilterValue] = useState<string>("");
+  const [inactiveCategory, setInactiveCategory] = useState<"today" | "threeDays" | "sevenDays" | "moreThanWeek">("today");
 
   const filterFields = [
     { name: "area", label: "Area", type: "select" as const, placeholder: "Pilih Area", config: {}, defaultValue: "", properties: { options: [{ label: "Semua Area", value: "" }, { label: "Area A", value: "area-a" }, { label: "Area B", value: "area-b" }, { label: "Area C", value: "area-c" }, { label: "Area D", value: "area-d" }, { label: "Area E", value: "area-e" }] } },
@@ -139,39 +197,37 @@ export default function DashboardPage() {
     { name: "year", label: "Tahun", type: "select" as const, placeholder: "Pilih Tahun", config: {}, defaultValue: dayjs().year().toString(), properties: { options: Array.from({ length: 5 }, (_, i) => { const year = dayjs().year() - i; return { label: i === 0 ? "Tahun Ini" : year.toString(), value: year.toString() }; }) } },
   ];
 
-  const reportTrendChartOptions = useChart({ colors: [theme.palette.primary.main, theme.palette.success.main, theme.palette.warning.main, theme.palette.info.main], xaxis: { categories: DUMMY_DATA.reportActivityTrend.categories }, stroke: { width: 3, curve: "smooth" }, legend: { show: false }, tooltip: { y: { formatter: (val: number) => `${val} laporan` } } });
-  const violationsChartOptions = useChart({ colors: [theme.palette.error.main], xaxis: { categories: DUMMY_DATA.violationsByType.categories }, plotOptions: { bar: { horizontal: true, borderRadius: 8 } }, dataLabels: { enabled: true }, tooltip: { y: { formatter: (val: number) => `${val} pelanggaran` } } });
-  const activeAreasChartOptions = useChart({ colors: [theme.palette.primary.main], xaxis: { categories: DUMMY_DATA.mostActiveAreas.categories }, plotOptions: { bar: { borderRadius: 8, columnWidth: "60%" } }, dataLabels: { enabled: true }, tooltip: { y: { formatter: (val: number) => `${val} laporan` } } });
-  const activeUnitsChartOptions = useChart({ colors: [theme.palette.success.main], xaxis: { categories: DUMMY_DATA.mostActiveWorkUnits.categories }, plotOptions: { bar: { borderRadius: 8, columnWidth: "60%" } }, dataLabels: { enabled: true }, tooltip: { y: { formatter: (val: number) => `${val} laporan` } } });
-
-  const KPICard = ({ title, value, subtitle, icon, color, trend, trendUp, loading = false }: { title: string; value: string | number; subtitle: string; icon: string; color: string; trend?: number; trendUp?: boolean; loading?: boolean }) => (
-    <Grid size={3}>
-      <Card>
-        <CardContent>
-          {loading ? <Skeleton variant="rectangular" height={120} /> : (
-            <Stack spacing={2}>
-              <Stack direction="row" alignItems="center" justifyContent="space-between">
-                <Box sx={{ width: 56, height: 56, borderRadius: 2, display: "flex", alignItems: "center", justifyContent: "center", bgcolor: `${color}.lighter`, color: `${color}.main` }}>
-                  <Icon icon={icon} width={32} />
-                </Box>
-                {trend !== undefined && (
-                  <Stack direction="row" alignItems="center" spacing={0.5}>
-                    <Icon icon={trendUp ? "eva:trending-up-fill" : "eva:trending-down-fill"} width={20} color={trendUp ? theme.palette.success.main : theme.palette.error.main} />
-                    <Typography variant="body2" color={trendUp ? "success.main" : "error.main"} fontWeight={600}>{Math.abs(trend)}%</Typography>
-                  </Stack>
-                )}
-              </Stack>
-              <Box>
-                <Typography variant="h3" fontWeight={700}>{value}</Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>{subtitle}</Typography>
-              </Box>
-              <Typography variant="caption" color="text.secondary">{title}</Typography>
-            </Stack>
-          )}
-        </CardContent>
-      </Card>
-    </Grid>
-  );
+  const reportTrendChartOptions = useChart({ colors: [theme.palette.primary.main, theme.palette.success.main, theme.palette.warning.main, theme.palette.info.main], xaxis: { categories: DUMMY_DATA.reportActivityTrend.categories }, stroke: { width: 3, curve: "smooth" }, legend: { show: false }, tooltip: { theme: theme.palette.mode, y: { formatter: (val: number) => `${val} laporan` } } });
+  const violationsChartOptions = {
+    ...useChart({ 
+      colors: [theme.palette.error.main, theme.palette.error.light, theme.palette.warning.main, theme.palette.warning.light, theme.palette.grey[400]], 
+      stroke: { width: 0 },
+      dataLabels: { enabled: true, dropShadow: { enabled: false } },
+      legend: { show: true, position: 'bottom', horizontalAlign: 'center', fontSize: '12px' },
+      plotOptions: {
+        pie: {
+          donut: {
+            size: '75%',
+            labels: {
+              show: true,
+              value: { fontSize: '18px', fontWeight: 600 },
+              total: {
+                show: true,
+                label: 'Total',
+                fontSize: '14px',
+                fontWeight: 600,
+                formatter: () => '87'
+              }
+            }
+          }
+        }
+      },
+      tooltip: { theme: theme.palette.mode, y: { formatter: (val: number) => `${val} pelanggaran` } }
+    }),
+    labels: DUMMY_DATA.violationsByType.categories
+  };
+  const activeAreasChartOptions = useChart({ colors: [theme.palette.primary.main], xaxis: { categories: DUMMY_DATA.mostActiveAreas.categories }, plotOptions: { bar: { borderRadius: 8, columnWidth: "60%" } }, dataLabels: { enabled: true }, tooltip: { theme: theme.palette.mode, y: { formatter: (val: number) => `${val} laporan` } } });
+  const activeUnitsChartOptions = useChart({ colors: [theme.palette.success.main], xaxis: { categories: DUMMY_DATA.mostActiveWorkUnits.categories }, plotOptions: { bar: { borderRadius: 8, columnWidth: "60%" } }, dataLabels: { enabled: true }, tooltip: { theme: theme.palette.mode, y: { formatter: (val: number) => `${val} laporan` } } });
 
   const EmployeeItem = ({ employee, rank, maxValue, showProgress = true }: { employee: { name: string; reports: number; avatar: string; score?: number }; rank: number; maxValue: number; showProgress?: boolean }) => {
     const progress = (employee.reports / maxValue) * 100;
@@ -208,6 +264,25 @@ export default function DashboardPage() {
     </Box>
   );
 
+  const InactiveEmployeeItem = ({ employee, rank }: { employee: { name: string; avatar: string; position: string; unit: string; lastReport: Date }; rank: number }) => {
+    const now = new Date(2026, 2, 8); // March 8, 2026
+    const diffMs = now.getTime() - employee.lastReport.getTime();
+    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    return (
+      <Box sx={{ py: 1.5, borderBottom: `1px solid ${theme.palette.divider}` }}>
+        <Stack direction="row" spacing={2} alignItems="center">
+          <Typography variant="body2" fontWeight={600} color="text.secondary" sx={{ minWidth: 24 }}>#{rank}</Typography>
+          <Avatar sx={{ width: 40, height: 40, bgcolor: theme.palette.grey[300], color: theme.palette.grey[700], fontSize: "0.875rem" }}>{employee.avatar}</Avatar>
+          <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+            <Typography variant="body2" fontWeight={600} noWrap>{employee.name}</Typography>
+            <Typography variant="caption" color="text.secondary" noWrap>{employee.position} - {employee.unit}</Typography>
+          </Box>
+          <Chip label={`${diffDays} hari lalu`} size="small" color="warning" variant="outlined" />
+        </Stack>
+      </Box>
+    );
+  };
+
   type ReportItem = { id: string; name: string; description: string; employeeName: string; avatarUrl: string; postedAt: Date; location: string; status: string };
   const [reportType, setReportType] = useState<"patrol" | "inspection" | "incident" | "visit">("patrol");
   const [currentReportIndex, setCurrentReportIndex] = useState(0);
@@ -228,7 +303,7 @@ export default function DashboardPage() {
   const formatTimeAgo = (date: Date) => { const now = new Date(); const diffMs = now.getTime() - date.getTime(); const diffMins = Math.floor(diffMs / 60000); const diffHours = Math.floor(diffMs / 3600000); if (diffMins < 60) return `${diffMins} menit yang lalu`; else if (diffHours < 24) return `${diffHours} jam yang lalu`; else return dayjs(date).format("DD MMM YYYY HH:mm"); };
 
   const LatestReportsCard = () => (
-    <Card sx={{ height: "100%" }}>
+    <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
       <CardHeader title="Laporan Terbaru" subheader="Aktivitas pelaporan terkini" sx={{ pb: 1 }} action={currentReports.length > 0 && (
         <Stack direction="row" spacing={0.5} alignItems="center">
           <IconButton size="small" onClick={handlePrevReport} disabled={currentReportIndex === 0} sx={{ width: 28, height: 28 }}><Icon icon="eva:arrow-ios-back-fill" width={16} /></IconButton>
@@ -236,7 +311,7 @@ export default function DashboardPage() {
           <IconButton size="small" onClick={handleNextReport} disabled={currentReportIndex === currentReports.length - 1} sx={{ width: 28, height: 28 }}><Icon icon="eva:arrow-ios-forward-fill" width={16} /></IconButton>
         </Stack>
       )} />
-      <CardContent sx={{ pt: 1 }}>
+      <CardContent sx={{ flex: 1, overflow: "auto" }}>
         <Stack direction="row" spacing={0.5} sx={{ mb: 2, flexWrap: "wrap", gap: 0.5 }}>
           {reportTypes.map((type) => (
             <Chip key={type.value} label={type.label} icon={<Icon icon={type.icon} width={14} />} onClick={() => handleReportTypeChange(type.value as any)} color={reportType === type.value ? "primary" : "default"} variant={reportType === type.value ? "filled" : "outlined"} size="small" sx={{ height: 26, fontSize: "0.75rem", ...(reportType === type.value && { bgcolor: type.color, color: "white", "& .MuiChip-icon": { color: "white" } }) }} />
@@ -249,37 +324,73 @@ export default function DashboardPage() {
             <Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>Belum ada laporan {reportTypes.find((t) => t.value === reportType)?.label.toLowerCase()} saat ini</Typography>
           </Box>
         ) : (
-          <Box>
-            <Stack spacing={1.5}>
-              <Stack direction="row" spacing={1.5} alignItems="flex-start">
-                <Avatar sx={{ width: 40, height: 40, bgcolor: reportTypes.find((t) => t.value === reportType)?.color, fontSize: "0.9rem" }}>{currentReport.avatarUrl}</Avatar>
-                <Box sx={{ flexGrow: 1 }}>
-                  <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1}>
-                    <Box sx={{ flexGrow: 1, minWidth: 0 }}>
-                      <Typography variant="body2" fontWeight={600} noWrap>{currentReport.name}</Typography>
-                      <Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>oleh {currentReport.employeeName}</Typography>
-                    </Box>
-                    <Chip label={getStatusLabel(currentReport.status)} size="small" sx={{ height: 20, fontSize: "0.65rem", bgcolor: getStatusColor(currentReport.status) + "20", color: getStatusColor(currentReport.status), fontWeight: 600 }} />
-                  </Stack>
-                </Box>
-              </Stack>
-              <Divider />
-              <Box><Typography variant="caption" color="text.secondary" sx={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", fontSize: "0.75rem" }}>{currentReport.description}</Typography></Box>
-              <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ gap: 0.5 }}>
-                <Stack direction="row" spacing={0.5} alignItems="center"><Icon icon="mdi:map-marker" width={14} color={theme.palette.text.secondary} /><Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>{currentReport.location}</Typography></Stack>
-                <Stack direction="row" spacing={0.5} alignItems="center"><Icon icon="mdi:clock-outline" width={14} color={theme.palette.text.secondary} /><Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>{formatTimeAgo(currentReport.postedAt)}</Typography></Stack>
-              </Stack>
-              <Divider sx={{ borderStyle: "dashed" }} />
-              <Stack direction="row" spacing={1}>
-                <Button fullWidth size="small" variant="outlined" startIcon={<Icon icon="mdi:eye" width={16} />} onClick={() => console.info("VIEW DETAIL", currentReport.id)} sx={{ fontSize: "0.7rem", py: 0.5 }}>Detail</Button>
-                <Button fullWidth size="small" variant="contained" startIcon={<Icon icon="mdi:download" width={16} />} onClick={() => console.info("DOWNLOAD", currentReport.id)} sx={{ fontSize: "0.7rem", py: 0.5 }}>Unduh</Button>
-              </Stack>
+          <Stack spacing={1.5}>
+            <Stack direction="row" spacing={1.5} alignItems="flex-start">
+              <Avatar sx={{ width: 40, height: 40, bgcolor: reportTypes.find((t) => t.value === reportType)?.color, fontSize: "0.9rem" }}>{currentReport.avatarUrl}</Avatar>
+              <Box sx={{ flexGrow: 1 }}>
+                <Stack direction="row" justifyContent="space-between" alignItems="flex-start" spacing={1}>
+                  <Box sx={{ flexGrow: 1, minWidth: 0 }}>
+                    <Typography variant="body2" fontWeight={600} noWrap>{currentReport.name}</Typography>
+                    <Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>oleh {currentReport.employeeName}</Typography>
+                  </Box>
+                  <Chip label={getStatusLabel(currentReport.status)} size="small" sx={{ height: 20, fontSize: "0.65rem", bgcolor: getStatusColor(currentReport.status) + "20", color: getStatusColor(currentReport.status), fontWeight: 600 }} />
+                </Stack>
+              </Box>
             </Stack>
-          </Box>
+            <Divider />
+            <Box><Typography variant="caption" color="text.secondary" sx={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", fontSize: "0.75rem" }}>{currentReport.description}</Typography></Box>
+            <Stack direction="row" spacing={2} alignItems="center" flexWrap="wrap" sx={{ gap: 0.5 }}>
+              <Stack direction="row" spacing={0.5} alignItems="center"><Icon icon="mdi:map-marker" width={14} color={theme.palette.text.secondary} /><Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>{currentReport.location}</Typography></Stack>
+              <Stack direction="row" spacing={0.5} alignItems="center"><Icon icon="mdi:clock-outline" width={14} color={theme.palette.text.secondary} /><Typography variant="caption" color="text.secondary" sx={{ fontSize: "0.7rem" }}>{formatTimeAgo(currentReport.postedAt)}</Typography></Stack>
+            </Stack>
+            <Divider sx={{ borderStyle: "dashed" }} />
+          </Stack>
         )}
       </CardContent>
+      <CardActions>
+        <Stack direction="row" justifyContent="space-between" spacing={1} sx={{ width: "100%", p: 2 }}>
+          <Button fullWidth size="small" variant="outlined" startIcon={<Icon icon="mdi:eye" width={16} />} onClick={() => console.info("VIEW DETAIL", currentReport.id)} sx={{ fontSize: "0.7rem", py: 0.5 }}>Detail</Button>
+          <Button fullWidth size="small" variant="contained" startIcon={<Icon icon="mdi:download" width={16} />} onClick={() => console.info("DOWNLOAD", currentReport.id)} sx={{ fontSize: "0.7rem", py: 0.5 }}>Unduh</Button>
+        </Stack>
+      </CardActions>
     </Card>
   );
+
+  const InactiveEmployeesCard = () => {
+    const inactiveCategories = [
+      { value: "today", label: "Hari Ini", icon: "mdi:calendar-today", count: DUMMY_DATA.inactiveEmployees.today.length, color: theme.palette.warning.main },
+      { value: "threeDays", label: "Sejak 3 Hari Lalu", icon: "mdi:calendar-clock", count: DUMMY_DATA.inactiveEmployees.threeDays.length, color: theme.palette.warning.dark },
+      { value: "sevenDays", label: "Sejak 7 Hari Lalu", icon: "mdi:calendar-alert", count: DUMMY_DATA.inactiveEmployees.sevenDays.length, color: theme.palette.error.light },
+      { value: "moreThanWeek", label: "Sejak Lebih dari 7 Hari", icon: "mdi:calendar-remove", count: DUMMY_DATA.inactiveEmployees.moreThanWeek.length, color: theme.palette.error.main },
+    ];
+    const getCurrentInactiveEmployees = () => DUMMY_DATA.inactiveEmployees[inactiveCategory] || [];
+    const currentInactiveEmployees = getCurrentInactiveEmployees();
+    return (
+      <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
+        <CardHeader title="Karyawan Belum Submit Laporan" subheader="Monitoring karyawan yang belum melaporkan aktivitas" action={
+          <Chip icon={<Icon icon="mdi:account-alert" width={16} />} label={`${currentInactiveEmployees.length} Karyawan`} size="small" color="warning" />
+        } />
+        <CardContent sx={{ flex: 1, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+          <Stack direction="row" spacing={0.5} sx={{ mb: 2, flexWrap: "wrap", gap: 0.5 }}>
+            {inactiveCategories.map((category) => (
+              <Chip key={category.value} label={`${category.label} (${category.count})`} icon={<Icon icon={category.icon} width={14} />} onClick={() => setInactiveCategory(category.value as any)} color={inactiveCategory === category.value ? "warning" : "default"} variant={inactiveCategory === category.value ? "filled" : "outlined"} size="small" sx={{ height: 28, fontSize: "0.75rem", ...(inactiveCategory === category.value && { bgcolor: category.color, color: "white", "& .MuiChip-icon": { color: "white" } }) }} />
+            ))}
+          </Stack>
+          {loading ? <Skeleton variant="rectangular" height={400} /> : currentInactiveEmployees.length === 0 ? (
+            <Box sx={{ textAlign: "center", py: 4, bgcolor: theme.palette.grey[50], borderRadius: 2 }}>
+              <Icon icon="mdi:account-check" width={48} color={theme.palette.success.main} />
+              <Typography variant="subtitle2" color="text.secondary" sx={{ mt: 1 }}>Semua Karyawan Aktif</Typography>
+              <Typography variant="caption" color="text.secondary">Tidak ada karyawan yang belum submit laporan di kategori ini</Typography>
+            </Box>
+          ) : (
+            <Box sx={{ maxHeight: 325, overflowY: "auto" }}>
+              {currentInactiveEmployees.map((emp, idx) => <InactiveEmployeeItem key={emp.id} employee={emp} rank={idx + 1} />)}
+            </Box>
+          )}
+        </CardContent>
+      </Card>
+    );
+  };
 
   const getMarkerColor = (type: string, status: string) => { if (status === "pending") return theme.palette.warning.main; if (status === "in-progress") return theme.palette.info.main; switch (type) { case "patrol": return theme.palette.primary.main; case "incident": return theme.palette.error.main; case "inspection": return theme.palette.success.main; case "visit": return theme.palette.info.main; default: return theme.palette.grey[500]; } };
   const getMarkerIcon = (type: string) => { switch (type) { case "patrol": return "mdi:shield-account"; case "incident": return "mdi:alert-circle"; case "inspection": return "mdi:clipboard-check"; case "visit": return "mdi:map-marker-check"; default: return "mdi:map-marker"; } };
@@ -318,10 +429,18 @@ export default function DashboardPage() {
           </DialogActions>
         </Dialog>
         <Grid container spacing={3}>
-          <KPICard title="Total Laporan Diserahkan" value={DUMMY_DATA.kpiCards.totalReports.value} subtitle={DUMMY_DATA.kpiCards.totalReports.subtitle} icon="mdi:file-document-multiple" color="primary" trend={DUMMY_DATA.kpiCards.totalReports.trend} trendUp={DUMMY_DATA.kpiCards.totalReports.trendUp} loading={loading} />
-          <KPICard title="Karyawan Aktif Melaporkan" value={DUMMY_DATA.kpiCards.activeEmployees.value} subtitle={DUMMY_DATA.kpiCards.activeEmployees.subtitle} icon="mdi:account-check" color="success" trend={DUMMY_DATA.kpiCards.activeEmployees.trend} trendUp={DUMMY_DATA.kpiCards.activeEmployees.trendUp} loading={loading} />
-          <KPICard title="Total Pelanggaran" value={DUMMY_DATA.kpiCards.totalViolations.value} subtitle={DUMMY_DATA.kpiCards.totalViolations.subtitle} icon="mdi:alert-octagon" color="error" trend={DUMMY_DATA.kpiCards.totalViolations.trend} trendUp={DUMMY_DATA.kpiCards.totalViolations.trendUp} loading={loading} />
-          <KPICard title="Area Patroli Aktif" value={DUMMY_DATA.kpiCards.activePatrolAreas.value} subtitle={DUMMY_DATA.kpiCards.activePatrolAreas.subtitle} icon="mdi:map-marker-multiple" color="warning" trend={DUMMY_DATA.kpiCards.activePatrolAreas.trend} trendUp={DUMMY_DATA.kpiCards.activePatrolAreas.trendUp} loading={loading} />
+          <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+            <AppWidget title="Total Laporan Diserahkan" total={DUMMY_DATA.kpiCards.totalReports.value} subtitle={DUMMY_DATA.kpiCards.totalReports.subtitle} icon="mdi:file-document-multiple" color="primary" trend={DUMMY_DATA.kpiCards.totalReports.trend} trendUp={DUMMY_DATA.kpiCards.totalReports.trendUp} />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+            <AppWidget title="Karyawan Aktif Melaporkan" total={DUMMY_DATA.kpiCards.activeEmployees.value} subtitle={DUMMY_DATA.kpiCards.activeEmployees.subtitle} icon="mdi:account-check" color="success" trend={DUMMY_DATA.kpiCards.activeEmployees.trend} trendUp={DUMMY_DATA.kpiCards.activeEmployees.trendUp} />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+            <AppWidget title="Total Pelanggaran" total={DUMMY_DATA.kpiCards.totalViolations.value} subtitle={DUMMY_DATA.kpiCards.totalViolations.subtitle} icon="mdi:alert-octagon" color="error" trend={DUMMY_DATA.kpiCards.totalViolations.trend} trendUp={DUMMY_DATA.kpiCards.totalViolations.trendUp} />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6, lg: 3 }}>
+            <AppWidget title="Area Patroli Aktif" total={DUMMY_DATA.kpiCards.activePatrolAreas.value} subtitle={DUMMY_DATA.kpiCards.activePatrolAreas.subtitle} icon="mdi:map-marker-multiple" color="warning" trend={DUMMY_DATA.kpiCards.activePatrolAreas.trend} trendUp={DUMMY_DATA.kpiCards.activePatrolAreas.trendUp} />
+          </Grid>
           <Grid size={8}>
             <Card sx={{ height: "100%" }}>
               <CardHeader title="Tren Aktivitas Laporan" subheader="Jumlah laporan yang diserahkan per bulan" />
@@ -330,36 +449,64 @@ export default function DashboardPage() {
             </Card>
           </Grid>
           <Grid size={4}>
-            <Card sx={{ height: "100%" }}>
+            <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
               <CardHeader title="Karyawan Paling Aktif" subheader="Top 10 berdasarkan jumlah laporan" />
-              <CardContent>{loading ? <Skeleton variant="rectangular" height={400} /> : <Box sx={{ maxHeight: 400, overflowY: "auto" }}>{DUMMY_DATA.mostActiveEmployees.map((emp, idx) => <EmployeeItem key={emp.id} employee={emp} rank={idx + 1} maxValue={DUMMY_DATA.mostActiveEmployees[0].reports} />)}</Box>}</CardContent>
+              <CardContent sx={{ flex: 1, overflow: "auto" }}>{loading ? <Skeleton variant="rectangular" height={400} /> : <Box sx={{ maxHeight: 400, overflowY: "auto" }}>{DUMMY_DATA.mostActiveEmployees.map((emp, idx) => <EmployeeItem key={emp.id} employee={emp} rank={idx + 1} maxValue={DUMMY_DATA.mostActiveEmployees[0].reports} />)}</Box>}</CardContent>
             </Card>
           </Grid>
-          <Grid size={6}>
-            <Card sx={{ height: "100%" }}>
+          <Grid size={4}>
+            <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
               <CardHeader title="Pelanggaran Berdasarkan Jenis" subheader="Kategori pelanggaran yang tercatat" />
-              {loading ? <Box sx={{ p: 2.5 }}><Skeleton variant="rectangular" height={320} /></Box> : <Chart type="bar" series={DUMMY_DATA.violationsByType.series} options={violationsChartOptions} height={320} sx={{ py: 2.5, pl: 1, pr: 2.5 }} />}
+              <CardContent sx={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                {loading ? <Skeleton variant="rectangular" height={360} width="100%" /> : <Chart type="donut" series={DUMMY_DATA.violationsByType.series[0].data} options={violationsChartOptions} height={360} sx={{ width: "100%" }} />}
+              </CardContent>
             </Card>
           </Grid>
-          <Grid size={6}>
-            <Card sx={{ height: "100%" }}>
+          <Grid size={4}>
+            <Card sx={{ height: "100%", display: "flex", flexDirection: "column" }}>
               <CardHeader title="Karyawan dengan Pelanggaran Terbanyak" subheader="Ranking berdasarkan jumlah pelanggaran" />
-              <CardContent>{loading ? <Skeleton variant="rectangular" height={320} /> : <Box sx={{ maxHeight: 320, overflowY: "auto" }}>{DUMMY_DATA.employeesWithViolations.map((emp, idx) => <ViolationItem key={emp.id} employee={emp} rank={idx + 1} />)}</Box>}</CardContent>
+              <CardContent sx={{ flex: 1, overflow: "hidden" }}>
+                <Box sx={{ maxHeight: 400, overflowY: "auto" }}>
+                  {loading ? <Skeleton variant="rectangular" height={320} /> : DUMMY_DATA.employeesWithViolations.map((emp, idx) => <ViolationItem key={emp.id} employee={emp} rank={idx + 1} />)}
+                </Box>
+              </CardContent>
             </Card>
           </Grid>
-          <Grid size={6}>
-            <Card sx={{ height: "100%" }}>
-              <CardHeader title="Area Paling Aktif" subheader="Ranking area berdasarkan laporan yang diserahkan" />
-              {loading ? <Box sx={{ p: 2.5 }}><Skeleton variant="rectangular" height={320} /></Box> : <Chart type="bar" series={DUMMY_DATA.mostActiveAreas.series} options={activeAreasChartOptions} height={320} sx={{ py: 2.5, pl: 1, pr: 2.5 }} />}
-            </Card>
+          <Grid size={4}>
+            <InactiveEmployeesCard />
           </Grid>
-          <Grid size={6}>
-            <Card sx={{ height: "100%" }}>
-              <CardHeader title="Unit Kerja Paling Aktif" subheader="Ranking unit berdasarkan aktivitas pelaporan" />
-              {loading ? <Box sx={{ p: 2.5 }}><Skeleton variant="rectangular" height={320} /></Box> : <Chart type="bar" series={DUMMY_DATA.mostActiveWorkUnits.series} options={activeUnitsChartOptions} height={320} sx={{ py: 2.5, pl: 1, pr: 2.5 }} />}
-            </Card>
+          <Grid size={8}>
+            {loading ? (
+              <Card sx={{ height: "100%" }}>
+                <CardHeader title="Area Paling Aktif" subheader="Distribusi laporan per area" />
+                <Box sx={{ p: 2.5 }}><Skeleton variant="rectangular" height={320} /></Box>
+              </Card>
+            ) : (
+              <ActiveAreasChart
+                title="Area Paling Aktif"
+                subheader="Distribusi laporan per area"
+                chart={{
+                  colors: [
+                    theme.palette.primary.main,
+                    theme.palette.info.main,
+                    theme.palette.success.main,
+                    theme.palette.warning.main,
+                    theme.palette.error.main,
+                    theme.palette.secondary.main,
+                  ],
+                  series: DUMMY_DATA.mostActiveAreas.categories.map((area, index) => ({
+                    label: area,
+                    value: DUMMY_DATA.mostActiveAreas.series[0].data[index],
+                  })),
+                }}
+                sx={{ height: "100%" }}
+              />
+            )}
           </Grid>
-          <Grid size={12}><LatestReportsCard /></Grid>
+          <Grid size={4}>
+            <LatestReportsCard />
+          </Grid>
+          <Grid size={12}></Grid>
           <Grid size={12}>
             <Card>
               <CardHeader title="Monitor Lokasi Laporan" subheader="Peta interaktif menampilkan koordinat GPS laporan" action={
